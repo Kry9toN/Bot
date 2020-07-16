@@ -1,8 +1,8 @@
-# HomeBot
+# KBot
 
 ## A modular Telegram bot, written on Bash
 
-
+#### Base from [HomeBot](https://github.com/SebaUbuntu/HomeBot)
 
 ### How to use it:
 
