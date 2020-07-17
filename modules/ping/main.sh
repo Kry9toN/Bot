@@ -20,5 +20,6 @@ module_ping() {
         local MESSAGE_ID=$(tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "Pong !!!" --reply_to_message_id "$(tg_get_message_id "$@")" | jq .result.message_id)
         END=$(($(date +%s%N)/1000000))
         DIFF=$(($END - $START))
-        tg_edit_message_text --chat_id "$(tg_get_chat_id "$@")" --message_id "$MESSAGE_ID" --text "$DIFF ms"
+        tg_edit_message_text --chat_id "$(tg_get_chat_id "$@")" --message_id "$MESSAGE_ID" --text "Pong !!!
+$DIFF ms"
 }
