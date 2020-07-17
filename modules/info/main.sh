@@ -16,8 +16,8 @@
 #
 
 module_start() {
-	tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "Hi! I'm a multifunction bot, written in Bash by SebaUbuntu, because Python is boring
-I use modules to expand my features, you can see what commands you can use by typing .modules
+	tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "Hi! I'm a multifunction bot, written in Bash by KryPtoN base on HomeBot by SebaUbuntu
+I use modules to expand my features, you can see what commands you can use by typing !or/modules
 
 Version: $VERSION ($BRANCH)"
 }
