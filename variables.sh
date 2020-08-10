@@ -40,3 +40,5 @@ export CI_SF_PROJECT=
 export CI_SF_USER=
 # SourceForge password
 export CI_SF_PASS=
+# Jenkins token
+export TOKEN_JENKINS=
