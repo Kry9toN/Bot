@@ -28,19 +28,19 @@ module_trigger() {
 trigger_parse_arguments() {
   while [ "${#}" -gt 0 ]; do
   	case "${1}" in
-           -h | --help )
+          -h | --help )
   		trigger_help "$@"
   		;;
-           -p | --project )
+          -p | --project )
   		PROJECT="${2}"
   		;;
-           -s | --sync )
+          -s | --sync )
   		SYNC="${2}"
   		;;
-           -cc | --ccache )
+          -cc | --ccache )
   		CCACHE="${2}"
   		;;
-           -c | --clean )
+          -c | --clean )
   		CLEAN="${2}"
   		;;
           -b | --build )
