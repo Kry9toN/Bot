@@ -28,40 +28,40 @@ module_trigger() {
 trigger_parse_arguments() {
   while [ "${#}" -gt 0 ]; do
   	case "${1}" in
-   -h | --help )
-  			trigger_help "$@"
-  			;;
-   -p | --project )
-  			PROJECT="${2}"
-  			;;
-   -s | --sync )
-  			SYNC="${2}"
-  			;;
-   -cc | --ccache )
-  			CCACHE="${2}"
-  			;;
-   -c | --clean )
-  			CLEAN="${2}"
-  			;;
-   -b | --build )
-  			TYPE="${2}"
-  			;;
-  	-d | --device )
-  			DEVICE="${2}"
-  			;;
-  	-t | --target )
-  			TRAGET="${2}"
-  			;;
-  	-j | --job)
-  			JOB="${2}"
-  			;;
-   -sf | --sourceforge)
-  			SF="${2}"
-                        ;;
-   -s | --server)
-  			SERVER="${2}"
-  			shift
-  			;;
+           -h | --help )
+  		trigger_help "$@"
+  		;;
+           -p | --project )
+  		PROJECT="${2}"
+  		;;
+           -s | --sync )
+  		SYNC="${2}"
+  		;;
+           -cc | --ccache )
+  		CCACHE="${2}"
+  		;;
+           -c | --clean )
+  		CLEAN="${2}"
+  		;;
+          -b | --build )
+  		TYPE="${2}"
+  		;;
+  	  -d | --device )
+  		DEVICE="${2}"
+  		;;
+  	  -t | --target )
+  		TRAGET="${2}"
+  		;;
+  	  -j | --job)
+  		JOB="${2}"
+  		;;
+          -sf | --sourceforge)
+                SF="${2}"
+                ;;
+          -s | --server)
+                SERVER="${2}"
+  		shift
+  		;;
   	esac
   	shift
   done
@@ -141,7 +141,7 @@ else
   --form server=$SERVER
 
   tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "Successful trigger jenkins for $DEVICE.
-  We wish you a successful build and land safely" --reply_to_message_id "$(tg_get_message_id "$@")" --parse_mode "Markdown"
+We wish you a successful build and land safely" --reply_to_message_id "$(tg_get_message_id "$@")" --parse_mode "Markdown"
 fi
 
 }
