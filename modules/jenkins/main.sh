@@ -57,6 +57,9 @@ trigger_parse_arguments() {
   			;;
    -sf | --sourceforge)
   			SF="${2}"
+                        ;;
+   -s | --server)
+  			SERVER="${2}"
   			shift
   			;;
   	esac
@@ -113,6 +116,10 @@ if [ "$SF" = "" ]; then
   SF=test
 fi
 
+if [ "$SERVER" = "" ]; then
+  SERVER=master
+fi
+
 if [ "$TOKEN_JENKINS" = "" ]; then
   tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "fatal: error: token Jenkins not available in variable" --reply_to_message_id "$(tg_get_message_id "$@")" --parse_mode "Markdown"
   exit
@@ -130,7 +137,9 @@ else
   --form build_type=$TYPE \
   --form target_command=$TARGET \
   --form jobs=$JOB \
-  --form upload_to_sf=$SF
+  --form upload_to_sf=$SF \
+  --form server=$SERVER
+
   tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "Successful trigger jenkins for $DEVICE.
   We wish you a successful build and land safely" --reply_to_message_id "$(tg_get_message_id "$@")" --parse_mode "Markdown"
 fi
