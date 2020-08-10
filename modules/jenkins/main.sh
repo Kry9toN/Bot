@@ -50,7 +50,7 @@ trigger_parse_arguments() {
   		DEVICE="${2}"
   		;;
   	  -t | --target )
-  		TRAGET="${2}"
+  		TARGET="${2}"
   		;;
   	  -j | --job)
   		JOB="${2}"
