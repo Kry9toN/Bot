@@ -30,6 +30,7 @@ trigger_parse_arguments() {
   	case "${1}" in
           -h | --help )
   		trigger_help "$@"
+                exit
   		;;
           -p | --project )
   		PROJECT="${2}"
