@@ -24,13 +24,27 @@ source base/telegram_send.sh
 
 module_trigger() {
 
+trigger_help() {
+	tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "$2
+
+Usage: \`!trigger [arguments] [value]\`
+ \`-s\` (sync yes/no) (optional)
+ \`-cc\` (ccache yes/no/clean) (optional)
+ \`-c\` (clean yes/no/installclean) (optional)
+ \`-d\` (device) (required)
+ \`-b\` (build type user/userdebug/eng) (optional)
+ \`-t\` (traget komodo/SystemUI/Settings) (optional)
+ \`-job\` (paralel build 1-8) (optional)
+ \`-sf\` (sourforge upload test/release) (optional)" --reply_to_message_id "$(tg_get_message_id "$@")" --parse_mode "Markdown"
+ exit
+}
+
 # Trigger agrument
 trigger_parse_arguments() {
   while [ "${#}" -gt 0 ]; do
   	case "${1}" in
           -h | --help )
   		trigger_help "$@"
-                exit
   		;;
           -p | --project )
   		PROJECT="${2}"
@@ -69,21 +83,6 @@ trigger_parse_arguments() {
 }
 
 trigger_parse_arguments $(tg_get_command_arguments "$@")
-
-trigger_help() {
-	tg_send_message --chat_id "$(tg_get_chat_id "$@")" --text "$2
-
-Usage: \`!trigger [arguments] [value]\`
- \`-s\` (sync yes/no) (optional)
- \`-cc\` (ccache yes/no/clean) (optional)
- \`-c\` (clean yes/no/installclean) (optional)
- \`-d\` (device) (required)
- \`-b\` (build type user/userdebug/eng) (optional)
- \`-t\` (traget komodo/SystemUI/Settings) (optional)
- \`-job\` (paralel build 1-8) (optional)
- \`-sf\` (sourforge upload test/release) (optional)" --reply_to_message_id "$(tg_get_message_id "$@")" --parse_mode "Markdown"
-	exit
-}
 
 if [ "$PROJECT" = "" ]; then
   PROJECT=komodo-release
@@ -126,7 +125,6 @@ if [ "$TOKEN_JENKINS" = "" ]; then
   exit
 elif [ "$DEVICE" = "" ]; then
   trigger_help "$@" "Missing, arguments -d (device) is required"
-  exit
 else
 # Post api
   curl https://jenkins.komodo-os.my.id/job/$PROJECT/buildWithParameters \
