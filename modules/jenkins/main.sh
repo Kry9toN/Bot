@@ -38,14 +38,15 @@ trigger_help() {
 	tg_send_message --chat_id "$(tg_get_chat_id "$MESSAGE")" --text "$2
 
 Usage: \`!trigger [arguments] [value]\`
- \`-s\` (sync yes/no) (optional)
- \`-cc\` (ccache yes/no/clean) (optional)
- \`-c\` (clean yes/no/installclean) (optional)
+ \`-s\` (sync yes/no) (optional) default (yes)
+ \`-c\` (ccache yes/no/clean) (optional) default (yes)
+ \`-C\` (clean yes/no/installclean) (optional) default (yes)
  \`-d\` (device) (required)
- \`-b\` (build type user/userdebug/eng) (optional)
- \`-t\` (traget komodo/SystemUI/Settings) (optional)
- \`-job\` (paralel build 1-8) (optional)
- \`-sf\` (sourforge upload test/release) (optional)" --reply_to_message_id "$(tg_get_message_id "$MESSAGE")" --parse_mode "Markdown"
+ \`-b\` (build type user/userdebug/eng) (optional) default (userdebug)
+ \`-t\` (traget komodo/SystemUI/Settings) (optional) default (komodo)
+ \`-j\` (paralel build 1-8) (optional) default (8)
+ \`-S\` (server where u want to build slave or master) (optional) default (master)
+ \`-sf\` (sourforge upload test/release) (optional) default (test)" --reply_to_message_id "$(tg_get_message_id "$MESSAGE")" --parse_mode "Markdown"
  exit
 }
 
@@ -62,10 +63,10 @@ trigger_parse_arguments() {
           -s | --sync )
   		SYNC="${2}"
   		;;
-          -cc | --ccache )
+          -c | --ccache )
   		CCACHE="${2}"
   		;;
-          -c | --clean )
+          -C | --clean )
   		CLEAN="${2}"
   		;;
           -b | --build )
@@ -83,7 +84,7 @@ trigger_parse_arguments() {
           -sf | --sourceforge)
                 SF="${2}"
                 ;;
-          -s | --server)
+          -S | --server)
                 SERVER="${2}"
   		shift
   		;;
@@ -115,7 +116,7 @@ if [ "$TYPE" = "" ]; then
 fi
 
 if [ "$TARGET" = "" ]; then
-  TARGET=bacon
+  TARGET=komodo
 fi
 
 if [ "$JOB" = "" ]; then
